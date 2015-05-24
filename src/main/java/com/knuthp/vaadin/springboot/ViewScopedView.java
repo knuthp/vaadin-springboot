@@ -12,6 +12,8 @@ import com.vaadin.ui.VerticalLayout;
 
 @SpringView(name = ViewScopedView.VIEW_NAME)
 public class ViewScopedView extends VerticalLayout implements View {
+	private static final long serialVersionUID = 1L;
+
 	public final static String VIEW_NAME = "view";
 	
 	@Autowired
