@@ -15,18 +15,18 @@ public class ViewScopedView extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 
 	public final static String VIEW_NAME = "view";
-	
+
 	@Autowired
 	private ViewGreeter viewGreeter;
-	
-	@Autowired 
+
+	@Autowired
 	private Greeter uiGreeter;
-	
+
 	@PostConstruct
 	void init() {
 		setMargin(true);
 		setSpacing(true);
-		addComponent(new Label("This is a view scoped view"));
+		addComponent(new Label("This is a view scoped view" + toString()));
 		addComponent(new Label(uiGreeter.sayHello()));
 		addComponent(new Label(viewGreeter.sayHello()));
 	}

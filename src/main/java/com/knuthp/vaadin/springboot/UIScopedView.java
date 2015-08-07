@@ -19,19 +19,20 @@ public class UIScopedView extends VerticalLayout implements View {
 
 	@Autowired
 	private Greeter greeter;
-	
+
 	@PostConstruct
 	void init() {
 		setMargin(true);
 		setSpacing(true);
-		addComponent(new Label("This is a UI scoped view. Greeter says: " + greeter.sayHello()));
-		
+		addComponent(new Label("This is a UI scoped view. " + toString()));
+		addComponent(new Label("Greeter says: " + greeter.sayHello()));
+
 	}
-	
+
 	@Override
 	public void enter(ViewChangeEvent event) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
