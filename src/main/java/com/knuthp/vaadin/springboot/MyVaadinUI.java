@@ -2,6 +2,7 @@ package com.knuthp.vaadin.springboot;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.knuthp.vaadin.springboot.calculator.CalculatorViewImpl;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.navigator.Navigator;
@@ -22,9 +23,9 @@ import com.vaadin.ui.themes.ValoTheme;
 public class MyVaadinUI extends UI {
 	private static final long serialVersionUID = 1L;
 	// we can use either constructor autowiring or field autowiring
-    @Autowired
-    private SpringViewProvider viewProvider;
-    
+	@Autowired
+	private SpringViewProvider viewProvider;
+
 	@Override
 	protected void init(VaadinRequest request) {
 		final VerticalLayout root = new VerticalLayout();
@@ -32,19 +33,22 @@ public class MyVaadinUI extends UI {
 		root.setMargin(true);
 		root.setSpacing(true);
 		setContent(root);
-		
+
 		final CssLayout navigationBar = new CssLayout();
 		navigationBar.addStyleName(ValoTheme.LAYOUT_COMPONENT_GROUP);
-		navigationBar.addComponent(createNavigationButton("View scoped view", ViewScopedView.VIEW_NAME));
-		navigationBar.addComponent(createNavigationButton("UI Scoped View", UIScopedView.VIEW_NAME));
+		navigationBar.addComponent(createNavigationButton("View scoped view",
+				ViewScopedView.VIEW_NAME));
+		navigationBar.addComponent(createNavigationButton("UI Scoped View",
+				UIScopedView.VIEW_NAME));
+		navigationBar.addComponent(createNavigationButton("Calculator",
+				CalculatorViewImpl.VIEW_NAME));
 		root.addComponent(navigationBar);
-		
-		
+
 		final Panel viewContainer = new Panel();
 		viewContainer.setSizeFull();
 		root.addComponent(viewContainer);
 		root.setExpandRatio(viewContainer, 1.0f);
-		
+
 		Navigator navigator = new Navigator(this, viewContainer);
 		navigator.addProvider(viewProvider);
 	}
@@ -52,8 +56,9 @@ public class MyVaadinUI extends UI {
 	private Component createNavigationButton(String caption, String viewName) {
 		Button button = new Button(caption);
 		button.addStyleName(ValoTheme.BUTTON_SMALL);
-		button.addClickListener(event -> getUI().getNavigator().navigateTo(viewName));
+		button.addClickListener(event -> {
+			getUI().getNavigator().navigateTo(viewName);
+		});
 		return button;
 	}
-
 }

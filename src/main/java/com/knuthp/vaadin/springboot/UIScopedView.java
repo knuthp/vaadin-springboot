@@ -2,6 +2,8 @@ package com.knuthp.vaadin.springboot;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vaadin.navigator.View;
@@ -14,6 +16,8 @@ import com.vaadin.ui.VerticalLayout;
 @UIScope
 @SpringView(name = UIScopedView.VIEW_NAME)
 public class UIScopedView extends VerticalLayout implements View {
+	private static final Logger LOG = LoggerFactory
+			.getLogger(UIScopedView.class);
 	private static final long serialVersionUID = 1L;
 	public static final String VIEW_NAME = "ui";
 
@@ -22,6 +26,7 @@ public class UIScopedView extends VerticalLayout implements View {
 
 	@PostConstruct
 	void init() {
+		LOG.info("init()");
 		setMargin(true);
 		setSpacing(true);
 		addComponent(new Label("This is a UI scoped view. " + toString()));
