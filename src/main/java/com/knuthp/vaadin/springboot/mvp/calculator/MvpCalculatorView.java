@@ -1,6 +1,6 @@
-package com.knuthp.vaadin.springboot.calculator;
+package com.knuthp.vaadin.springboot.mvp.calculator;
 
-public interface CalculatorView {
+public interface MvpCalculatorView {
 	void setDisplay(double value);
 
 	interface CalculatorViewListener {

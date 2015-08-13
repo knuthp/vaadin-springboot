@@ -1,4 +1,4 @@
-package com.knuthp.vaadin.springboot.calculator;
+package com.knuthp.vaadin.springboot.mvp.calculator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,11 +8,11 @@ import com.vaadin.spring.annotation.UIScope;
 
 @SpringComponent
 @UIScope
-public class CalculatorModel {
+public class MvpCalculatorModel {
 	private static final Logger LOG = LoggerFactory
-			.getLogger(CalculatorModel.class);
+			.getLogger(MvpCalculatorModel.class);
 
-	public CalculatorModel() {
+	public MvpCalculatorModel() {
 		LOG.info("CalculatorModel created");
 	}
 

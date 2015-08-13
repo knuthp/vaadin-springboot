@@ -1,4 +1,4 @@
-package com.knuthp.vaadin.springboot.calculator;
+package com.knuthp.vaadin.springboot.mvp.calculator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,17 +19,17 @@ import com.vaadin.ui.GridLayout;
 import com.vaadin.ui.Label;
 
 @ViewScope
-@SpringView(name = CalculatorViewImpl.VIEW_NAME)
-public class CalculatorViewImpl extends CustomComponent implements
-		CalculatorView, ClickListener, View {
+@SpringView(name = MvpCalculatorViewImpl.VIEW_NAME)
+public class MvpCalculatorViewImpl extends CustomComponent implements
+		MvpCalculatorView, ClickListener, View {
 	public static final String VIEW_NAME = "calculator";
 	private static final Logger LOG = LoggerFactory
-			.getLogger(CalculatorViewImpl.class);
+			.getLogger(MvpCalculatorViewImpl.class);
 	private Label display = new Label("0.0");
 
 	@Autowired
-	public CalculatorViewImpl(Presenter<CalculatorView> presenter,
-			CalculatorModel model) {
+	public MvpCalculatorViewImpl(Presenter<MvpCalculatorView> presenter,
+			MvpCalculatorModel model) {
 		LOG.info("New CalculatorViewImpl created");
 		presenter.setView(this);
 		GridLayout layout = new GridLayout(4, 5);
@@ -47,7 +47,7 @@ public class CalculatorViewImpl extends CustomComponent implements
 		display.setValue(Double.toString(value));
 	}
 
-	List<CalculatorViewListener> listeners = new ArrayList<CalculatorView.CalculatorViewListener>();
+	List<CalculatorViewListener> listeners = new ArrayList<MvpCalculatorView.CalculatorViewListener>();
 
 	@Override
 	public void addListener(CalculatorViewListener listener) {

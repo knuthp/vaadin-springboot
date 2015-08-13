@@ -2,7 +2,7 @@ package com.knuthp.vaadin.springboot;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.knuthp.vaadin.springboot.calculator.CalculatorViewImpl;
+import com.knuthp.vaadin.springboot.mvp.calculator.MvpCalculatorViewImpl;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.navigator.Navigator;
@@ -40,8 +40,8 @@ public class MyVaadinUI extends UI {
 				ViewScopedView.VIEW_NAME));
 		navigationBar.addComponent(createNavigationButton("UI Scoped View",
 				UIScopedView.VIEW_NAME));
-		navigationBar.addComponent(createNavigationButton("Calculator",
-				CalculatorViewImpl.VIEW_NAME));
+		navigationBar.addComponent(createNavigationButton("MVP Calculator",
+				MvpCalculatorViewImpl.VIEW_NAME));
 		root.addComponent(navigationBar);
 
 		final Panel viewContainer = new Panel();
