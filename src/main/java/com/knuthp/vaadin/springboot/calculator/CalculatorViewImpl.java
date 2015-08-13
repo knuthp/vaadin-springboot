@@ -28,7 +28,7 @@ public class CalculatorViewImpl extends CustomComponent implements
 	private Label display = new Label("0.0");
 
 	@Autowired
-	public CalculatorViewImpl(CalculatorPresenter presenter,
+	public CalculatorViewImpl(Presenter<CalculatorView> presenter,
 			CalculatorModel model) {
 		LOG.info("New CalculatorViewImpl created");
 		presenter.setView(this);

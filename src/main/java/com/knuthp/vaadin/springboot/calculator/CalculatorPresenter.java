@@ -12,7 +12,8 @@ import com.vaadin.spring.annotation.ViewScope;
 
 @SpringComponent
 @ViewScope
-public class CalculatorPresenter implements CalculatorViewListener {
+public class CalculatorPresenter implements CalculatorViewListener,
+		Presenter<CalculatorView> {
 	private static final Logger LOG = LoggerFactory
 			.getLogger(CalculatorPresenter.class);
 	CalculatorModel model;
