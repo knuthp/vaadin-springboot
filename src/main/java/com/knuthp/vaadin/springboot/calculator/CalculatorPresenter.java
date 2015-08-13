@@ -2,15 +2,19 @@ package com.knuthp.vaadin.springboot.calculator;
 
 import javax.annotation.PostConstruct;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.knuthp.vaadin.springboot.calculator.CalculatorView.CalculatorViewListener;
 import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.UIScope;
+import com.vaadin.spring.annotation.ViewScope;
 
 @SpringComponent
-@UIScope
+@ViewScope
 public class CalculatorPresenter implements CalculatorViewListener {
+	private static final Logger LOG = LoggerFactory
+			.getLogger(CalculatorPresenter.class);
 	CalculatorModel model;
 	CalculatorView view;
 
@@ -19,6 +23,7 @@ public class CalculatorPresenter implements CalculatorViewListener {
 
 	@Autowired
 	public CalculatorPresenter(CalculatorModel model) {
+		LOG.info("New CalculatorPresenter created");
 		this.model = model;
 	}
 
@@ -30,6 +35,7 @@ public class CalculatorPresenter implements CalculatorViewListener {
 
 	@PostConstruct
 	void init() {
+		LOG.info("init called (@PostContruct)");
 	}
 
 	@Override

@@ -1,11 +1,21 @@
 package com.knuthp.vaadin.springboot.calculator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.UIScope;
 
 @SpringComponent
 @UIScope
 public class CalculatorModel {
+	private static final Logger LOG = LoggerFactory
+			.getLogger(CalculatorModel.class);
+
+	public CalculatorModel() {
+		LOG.info("CalculatorModel created");
+	}
+
 	private double value = 0.0;
 
 	public void clear() {
