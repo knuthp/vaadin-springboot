@@ -31,6 +31,7 @@ public class PlaceListViewImpl extends VerticalLayout implements PlaceListView,
 		table.setSizeFull();
 		table.setPageLength(100);
 		addComponent(table);
+		setHeight(100, Unit.PERCENTAGE);
 
 		presenter.setView(this);
 
