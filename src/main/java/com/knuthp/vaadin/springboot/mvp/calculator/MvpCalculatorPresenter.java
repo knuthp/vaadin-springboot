@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.knuthp.vaadin.springboot.mvp.Presenter;
 import com.knuthp.vaadin.springboot.mvp.calculator.MvpCalculatorView.CalculatorViewListener;
 import com.vaadin.spring.annotation.SpringComponent;
 import com.vaadin.spring.annotation.ViewScope;
