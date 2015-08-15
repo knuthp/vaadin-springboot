@@ -14,17 +14,31 @@ import com.vaadin.spring.annotation.UIScope;
 public class RuterGateway {
 	private RestTemplate restTemplate = new RestTemplate();
 
-	public Place getStop(String id) {
-		ResponseEntity<Place> entity = restTemplate
-				.getForEntity("http://reisapi.ruter.no" + "/Place/GetStop/"
-						+ id, Place.class);
+	public PlaceLight getStop(String id) {
+		ResponseEntity<PlaceLight> entity = restTemplate.getForEntity(
+				"http://reisapi.ruter.no" + "/Place/GetStop/" + id,
+				PlaceLight.class);
 		return entity.getBody();
 	}
 
-	public List<Place> getStopsRuter() {
-		ResponseEntity<Place[]> entity = restTemplate.getForEntity(
-				"http://reisapi.ruter.no" + "/Place/GetStopsRuter/",
-				Place[].class);
+	public List<PlaceDetails> getPlaces(String id) {
+		ResponseEntity<PlaceDetails[]> entity = restTemplate.getForEntity(
+				"http://reisapi.ruter.no" + "/Place/GetPlaces/" + id,
+				PlaceDetails[].class);
 		return Arrays.asList(entity.getBody());
 	}
+
+	public List<PlaceLight> getStopsRuter() {
+		ResponseEntity<PlaceLight[]> entity = restTemplate.getForEntity(
+				"http://reisapi.ruter.no" + "/Place/GetStopsRuter/",
+				PlaceLight[].class);
+		return Arrays.asList(entity.getBody());
+	}
+
+	public List<Line> getLines() {
+		ResponseEntity<Line[]> entity = restTemplate.getForEntity(
+				"http://reisapi.ruter.no" + "/Line/GetLines/", Line[].class);
+		return Arrays.asList(entity.getBody());
+	}
+
 }

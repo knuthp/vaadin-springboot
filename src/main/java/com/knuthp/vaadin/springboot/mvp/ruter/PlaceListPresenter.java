@@ -22,7 +22,7 @@ public class PlaceListPresenter implements Presenter<PlaceListView> {
 	@Override
 	public void setView(PlaceListView view) {
 		this.view = view;
-		List<Place> list = placeList.getPlaceList();
+		List<PlaceLight> list = placeList.getPlaceList();
 		LOG.info("Init view with list of size={}", list.size());
 		view.init(list);
 	}

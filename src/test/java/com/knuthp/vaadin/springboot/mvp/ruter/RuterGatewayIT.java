@@ -14,7 +14,7 @@ public class RuterGatewayIT {
 	@Test
 	public void testOneStop() {
 		RuterGateway ruterGateway = new RuterGateway();
-		Place stop = ruterGateway.getStop("1001");
+		PlaceLight stop = ruterGateway.getStop("1001");
 
 		System.out.println(stop);
 
@@ -23,9 +23,28 @@ public class RuterGatewayIT {
 
 	@Test
 	public void testRuterStops() {
-		List<Place> stops = ruterGateway.getStopsRuter();
+		List<PlaceLight> stops = ruterGateway.getStopsRuter();
 
 		System.out.println(stops.size());
+
+	}
+
+	@Test
+	public void testGetPlace() throws Exception {
+		List<PlaceDetails> places = ruterGateway.getPlaces("1250100");
+
+		System.out.println(places);
+
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testLines() throws Exception {
+		List<Line> lines = ruterGateway.getLines();
+
+		System.out.println(lines);
+
+		fail("Not yet implemented");
 	}
 
 	@Before

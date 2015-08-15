@@ -17,7 +17,7 @@ public class PlaceList {
 		this.ruterGateway = ruterGateway;
 	}
 
-	public List<Place> getPlaceList() {
+	public List<PlaceLight> getPlaceList() {
 		return ruterGateway.getStopsRuter();
 	}
 

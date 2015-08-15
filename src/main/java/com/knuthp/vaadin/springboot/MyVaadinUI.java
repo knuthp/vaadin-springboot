@@ -59,9 +59,8 @@ public class MyVaadinUI extends UI {
 	private Component createNavigationButton(String caption, String viewName) {
 		Button button = new Button(caption);
 		button.addStyleName(ValoTheme.BUTTON_SMALL);
-		button.addClickListener(event -> {
-			getUI().getNavigator().navigateTo(viewName);
-		});
+		button.addClickListener(event -> getUI().getNavigator().navigateTo(
+				viewName));
 		return button;
 	}
 }

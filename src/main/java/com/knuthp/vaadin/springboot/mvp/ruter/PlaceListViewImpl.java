@@ -19,12 +19,12 @@ public class PlaceListViewImpl extends VerticalLayout implements PlaceListView,
 		View {
 	public static final String VIEW_NAME = "PlaceList";
 	public final Table table;
-	private final BeanContainer<String, Place> placeBeans;
+	private final BeanContainer<String, PlaceLight> placeBeans;
 
 	@Autowired
 	public PlaceListViewImpl(Presenter<PlaceListView> presenter) {
 		// setSizeFull();
-		placeBeans = new BeanContainer<String, Place>(Place.class);
+		placeBeans = new BeanContainer<String, PlaceLight>(PlaceLight.class);
 		placeBeans.setBeanIdProperty("id");
 
 		table = new Table("Ruter stoppesteder", placeBeans);
@@ -38,7 +38,7 @@ public class PlaceListViewImpl extends VerticalLayout implements PlaceListView,
 	}
 
 	@Override
-	public void init(List<Place> placeList) {
+	public void init(List<PlaceLight> placeList) {
 		placeBeans.addAll(placeList);
 	}
 

@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface PlaceListView {
 
-	void init(List<Place> placeList);
+	void init(List<PlaceLight> placeList);
 
 }

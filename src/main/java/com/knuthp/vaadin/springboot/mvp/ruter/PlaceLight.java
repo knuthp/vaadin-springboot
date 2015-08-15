@@ -4,14 +4,14 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Place {
+public class PlaceLight {
 	private final String id;
 	private final String name;
 	private final String shortName;
 	private final int X;
 	private final int y;
 
-	public Place(@JsonProperty("ID") String id,
+	public PlaceLight(@JsonProperty("ID") String id,
 			@JsonProperty("Name") String name,
 			@JsonProperty("ShortName") String shortName,
 			@JsonProperty("X") int x, @JsonProperty("Y") int y) {
