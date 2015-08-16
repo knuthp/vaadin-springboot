@@ -6,4 +6,10 @@ public interface PlaceListView {
 
 	void init(List<PlaceLight> placeList);
 
+	interface PlaceListViewListener {
+		void selectionChanged(String id);
+	}
+
+	void addListener(PlaceListViewListener listener);
+
 }

@@ -1,5 +1,6 @@
 package com.knuthp.vaadin.springboot.mvp.ruter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class PlaceListViewImpl extends VerticalLayout implements PlaceListView,
 	public static final String VIEW_NAME = "PlaceList";
 	public final Table table;
 	private final BeanContainer<String, PlaceLight> placeBeans;
+	private final List<PlaceListViewListener> listeners = new ArrayList<PlaceListViewListener>();
 
 	@Autowired
 	public PlaceListViewImpl(Presenter<PlaceListView> presenter) {
@@ -30,6 +32,10 @@ public class PlaceListViewImpl extends VerticalLayout implements PlaceListView,
 		table = new Table("Ruter stoppesteder", placeBeans);
 		table.setSizeFull();
 		table.setPageLength(100);
+		table.setSelectable(true);
+		table.addValueChangeListener(event -> listeners
+				.forEach(listener -> listener.selectionChanged(event
+						.getProperty().toString())));
 		addComponent(table);
 		setHeight(100, Unit.PERCENTAGE);
 
@@ -46,6 +52,11 @@ public class PlaceListViewImpl extends VerticalLayout implements PlaceListView,
 	public void enter(ViewChangeEvent event) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void addListener(PlaceListViewListener listener) {
+		listeners.add(listener);
 	}
 
 }
