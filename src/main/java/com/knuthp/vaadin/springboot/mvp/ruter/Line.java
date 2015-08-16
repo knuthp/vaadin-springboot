@@ -1,45 +1,25 @@
 package com.knuthp.vaadin.springboot.mvp.ruter;
 
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Line {
-	private final String id;
-	private final String name;
-	private final String lineColour;
-	private final String transportation;
 
-	public Line(@JsonProperty("ID") String id,
-			@JsonProperty("Name") String name,
-			@JsonProperty("LineColour") String lineColour,
-			@JsonProperty("Transportation") String transportation) {
-		super();
-		this.id = id;
-		this.lineColour = lineColour;
-		this.name = name;
-		this.transportation = transportation;
+	private final LineLight lineLight;
+	private final RuterGateway ruterGateway;
+
+	public Line(RuterGateway ruterGateway, String id) {
+		this.ruterGateway = ruterGateway;
+		lineLight = ruterGateway.getLine(id);
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public String getLineColour() {
-		return lineColour;
-	}
-
-	public String getTransportation() {
-		return transportation;
-	}
-
-	@Override
-	public String toString() {
-		return ReflectionToStringBuilder.toString(this);
-	}
-
-	public String getName() {
-		return name;
+	public List<Place> getStops() {
+		List<PlaceLight> lineStops = ruterGateway.getLineStops(lineLight
+				.getId());
+		List<Place> placeList = new ArrayList<Place>();
+		lineStops.forEach(place -> placeList.add(new Place(ruterGateway, place
+				.getId())));
+		return placeList;
 	}
 
 }

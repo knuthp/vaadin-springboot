@@ -21,7 +21,7 @@ public class PlaceDetails {
 	private final boolean alightingAllowed;
 	private final boolean boardingAllowed;
 	// TODO deviations
-	private final Map<String, Line> lines;
+	private final Map<String, LineLight> lines;
 	private final boolean realTimeStop;
 
 	public PlaceDetails(@JsonProperty("ID") String id,
@@ -33,7 +33,7 @@ public class PlaceDetails {
 			@JsonProperty("X") String x, @JsonProperty("Y") String y,
 			@JsonProperty("AlightingAllowed") boolean alightingAllowed,
 			@JsonProperty("BoardingAllowe") boolean boardingAllowed,
-			@JsonProperty("Lines") Line[] lines,
+			@JsonProperty("Lines") LineLight[] lines,
 			@JsonProperty("RealTimeStop") boolean realTimeStop) {
 		super();
 		this.id = id;
@@ -47,7 +47,7 @@ public class PlaceDetails {
 		this.alightingAllowed = alightingAllowed;
 		this.boardingAllowed = boardingAllowed;
 		this.lines = Arrays.stream(lines).collect(
-				Collectors.toMap(Line::getId, Function.identity()));
+				Collectors.toMap(LineLight::getId, Function.identity()));
 
 		this.realTimeStop = realTimeStop;
 	}
@@ -92,7 +92,7 @@ public class PlaceDetails {
 		return boardingAllowed;
 	}
 
-	public Map<String, Line> getLines() {
+	public Map<String, LineLight> getLines() {
 		return lines;
 	}
 

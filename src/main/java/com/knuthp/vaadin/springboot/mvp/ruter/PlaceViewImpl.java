@@ -52,8 +52,8 @@ public class PlaceViewImpl extends VerticalLayout implements PlaceView, View {
 		form.addComponent(binder.buildAndBind("RealTime info", "realTimeStop"));
 		addComponent(form);
 
-		BeanContainer<String, Line> lineBeans = new BeanContainer<String, Line>(
-				Line.class);
+		BeanContainer<String, LineLight> lineBeans = new BeanContainer<String, LineLight>(
+				LineLight.class);
 		lineBeans.setBeanIdProperty("id");
 		lineBeans.addAll(placeDetails.getLines().values());
 

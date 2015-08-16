@@ -10,11 +10,11 @@ import com.vaadin.data.util.BeanContainer;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
-import com.vaadin.spring.annotation.ViewScope;
+import com.vaadin.spring.annotation.VaadinSessionScope;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
-@ViewScope
+@VaadinSessionScope
 @SpringView(name = PlaceListViewImpl.VIEW_NAME)
 public class PlaceListViewImpl extends VerticalLayout implements PlaceListView,
 		View {

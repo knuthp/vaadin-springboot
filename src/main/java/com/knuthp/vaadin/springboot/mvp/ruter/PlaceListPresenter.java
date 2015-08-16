@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.knuthp.vaadin.springboot.mvp.Presenter;
 import com.knuthp.vaadin.springboot.mvp.ruter.PlaceListView.PlaceListViewListener;
 import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.ViewScope;
+import com.vaadin.spring.annotation.VaadinSessionScope;
 import com.vaadin.ui.UI;
 
 @SpringComponent
-@ViewScope
+@VaadinSessionScope
 public class PlaceListPresenter implements Presenter<PlaceListView>,
 		PlaceListViewListener {
 	private static final Logger LOG = LoggerFactory

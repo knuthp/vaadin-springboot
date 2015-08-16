@@ -21,4 +21,7 @@ public class PlaceList {
 		return ruterGateway.getStopsRuter();
 	}
 
+	public Place getPlaceFromId(String id) {
+		return new Place(ruterGateway, id);
+	}
 }

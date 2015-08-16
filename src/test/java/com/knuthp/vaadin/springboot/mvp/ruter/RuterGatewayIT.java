@@ -4,6 +4,8 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,9 +42,38 @@ public class RuterGatewayIT {
 
 	@Test
 	public void testLines() throws Exception {
-		List<Line> lines = ruterGateway.getLines();
+		List<LineLight> lines = ruterGateway.getLines();
 
 		System.out.println(lines);
+
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testLineData() throws Exception {
+		LineLight line = ruterGateway.getLine("9110");
+
+		System.out.println(line);
+
+		fail("Not yet implemented");
+
+	}
+
+	@Test
+	public void testLineStops() throws Exception {
+		List<PlaceLight> lineStops = ruterGateway.getLineStops("9110");
+
+		System.out.println(lineStops);
+
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testGetStopVisits() throws Exception {
+		List<MonitoredStopVisitDetails> realTimeData = ruterGateway
+				.getDepartures("2200500");
+
+		System.out.println(realTimeData);
 
 		fail("Not yet implemented");
 	}
@@ -50,6 +81,8 @@ public class RuterGatewayIT {
 	@Before
 	public void setUp() {
 		ruterGateway = new RuterGateway();
+		ReflectionToStringBuilder
+				.setDefaultStyle(ToStringStyle.SHORT_PREFIX_STYLE);
 	}
 
 }
