@@ -8,11 +8,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.knuthp.vaadin.springboot.mvp.Presenter;
+import com.vaadin.data.fieldgroup.FieldGroup;
+import com.vaadin.data.util.BeanContainer;
+import com.vaadin.data.util.BeanItem;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.ViewScope;
-import com.vaadin.ui.Label;
+import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
 @ViewScope
@@ -25,7 +29,6 @@ public class PlaceViewImpl extends VerticalLayout implements PlaceView, View {
 
 	@Autowired
 	public PlaceViewImpl(Presenter<PlaceView> presenter) {
-		addComponent(new Label("PLace"));
 		presenter.setView(this);
 	}
 
@@ -38,8 +41,25 @@ public class PlaceViewImpl extends VerticalLayout implements PlaceView, View {
 
 	@Override
 	public void setPlace(PlaceDetails placeDetails) {
-		addComponent(new Label(placeDetails.getName()));
-		addComponent(new Label(placeDetails.getDistrict()));
+		BeanItem<PlaceDetails> placeItem = new BeanItem<PlaceDetails>(
+				placeDetails);
+		FormLayout form = new FormLayout();
+		FieldGroup binder = new FieldGroup(placeItem);
+		form.addComponent(binder.buildAndBind("Id", "id"));
+		form.addComponent(binder.buildAndBind("Name", "name"));
+		form.addComponent(binder.buildAndBind("District", "district"));
+		form.addComponent(binder.buildAndBind("Place type", "placeType"));
+		form.addComponent(binder.buildAndBind("RealTime info", "realTimeStop"));
+		addComponent(form);
+
+		BeanContainer<String, Line> lineBeans = new BeanContainer<String, Line>(
+				Line.class);
+		lineBeans.setBeanIdProperty("id");
+		lineBeans.addAll(placeDetails.getLines().values());
+
+		Table lineTable = new Table("Lines", lineBeans);
+		addComponent(lineTable);
+
 	}
 
 	@Override
