@@ -17,10 +17,12 @@ public class ModelMain {
 			if (lineLight.getTransportation() == TransportationType.TRAIN) {
 				List<PlaceLight> lineStops = ruterGateway
 						.getLineStops(lineLight.getId());
+
 				LOG.info(
-						"Line.id={}, line.name={}, line.transportation={}, lineStops.size={}",
-						lineLight.getId(), lineLight.getName(),
-						lineLight.getTransportation(), lineStops.size());
+						"Line.id={}, line.name={}, lineStops.size={}, lineStops.from={}, lineStops.to={}",
+						lineLight.getId(), lineLight.getName(), lineStops
+								.size(), lineStops.get(0).getName(), lineStops
+								.get(lineStops.size() - 1).getName());
 			}
 		}
 
