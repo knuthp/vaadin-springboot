@@ -8,12 +8,12 @@ public class LineLight {
 	private final String id;
 	private final String name;
 	private final String lineColour;
-	private final String transportation;
+	private final TransportationType transportation;
 
 	public LineLight(@JsonProperty("ID") String id,
 			@JsonProperty("Name") String name,
 			@JsonProperty("LineColour") String lineColour,
-			@JsonProperty("Transportation") String transportation) {
+			@JsonProperty("Transportation") TransportationType transportation) {
 		super();
 		this.id = id;
 		this.lineColour = lineColour;
@@ -29,7 +29,7 @@ public class LineLight {
 		return lineColour;
 	}
 
-	public String getTransportation() {
+	public TransportationType getTransportation() {
 		return transportation;
 	}
 

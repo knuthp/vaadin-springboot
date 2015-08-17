@@ -14,10 +14,14 @@ public class ModelMain {
 		List<LineLight> lines = ruterGateway.getLines();
 		LOG.info("lines.size={}", lines.size());
 		for (LineLight lineLight : lines) {
-			List<PlaceLight> lineStops = ruterGateway.getLineStops(lineLight
-					.getId());
-			LOG.info("Line={}, stops.size={}", lineLight.getName(),
-					lineStops.size());
+			if (lineLight.getTransportation() == TransportationType.TRAIN) {
+				List<PlaceLight> lineStops = ruterGateway
+						.getLineStops(lineLight.getId());
+				LOG.info(
+						"Line.id={}, line.name={}, line.transportation={}, lineStops.size={}",
+						lineLight.getId(), lineLight.getName(),
+						lineLight.getTransportation(), lineStops.size());
+			}
 		}
 
 	}
