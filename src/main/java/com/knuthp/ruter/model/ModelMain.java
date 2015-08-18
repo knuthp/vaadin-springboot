@@ -14,13 +14,20 @@ public class ModelMain {
 	public static void main(String[] args) {
 		ToStringBuilder.setDefaultStyle(ToStringStyle.SIMPLE_STYLE);
 		RuterGateway ruterGateway = new RuterGateway();
+		LineList lineList = new LineList(ruterGateway);
+		List<Line> allLines = lineList.getAllLines();
+		LOG.info("Lines.size={}", allLines.size());
+
+		// showL14Distance(ruterGateway);
+		// listTrainLinesWithStartAndStop(ruterGateway);
+
+	}
+
+	private static void showL14Distance(RuterGateway ruterGateway) {
 		Line line = new Line(ruterGateway, "9114");
 		LOG.info("id={}, name={}, start={}, end={}, distance={}", line.getId(),
 				line.getName(), line.getStart().getName(), line.getEnd()
 						.getName(), line.getDistanceByLine());
-
-		// listTrainLinesWithStartAndStop(ruterGateway);
-
 	}
 
 	private static void listTrainLinesWithStartAndStop(RuterGateway ruterGateway) {
