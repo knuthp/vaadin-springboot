@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Line {
-
 	private final LineLight lineLight;
 	private final RuterGateway ruterGateway;
 	private List<Place> placeList;
@@ -51,7 +50,8 @@ public class Line {
 		for (int i = 0; i < placeList.size() - 1; i++) {
 			Place current = placeList.get(i);
 			Place next = placeList.get(i + 1);
-			distance = current.getPos().distance(next.getPos());
+			distance += current.getPos().distance(next.getPos());
+
 		}
 		return distance;
 	}
