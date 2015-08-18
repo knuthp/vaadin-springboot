@@ -4,13 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.vaadin.spring.annotation.SpringComponent;
-import com.vaadin.spring.annotation.UIScope;
-
-@SpringComponent
-@UIScope
+@Component
 public class RuterGateway {
 	private RestTemplate restTemplate = new RestTemplate();
 

@@ -26,7 +26,7 @@ public class Line {
 		return lineLight.getName();
 	}
 
-	public List<Place> getStops() {
+	public List<Place> stops() {
 		if (placeList == null) {
 			List<PlaceLight> lineStops = ruterGateway.getLineStops(lineLight
 					.getId());
@@ -37,15 +37,15 @@ public class Line {
 		return placeList;
 	}
 
-	public Place getStart() {
-		return getStops().get(0);
+	public Place start() {
+		return stops().get(0);
 	}
 
-	public Place getEnd() {
-		return getStops().get(getStops().size() - 1);
+	public Place end() {
+		return stops().get(stops().size() - 1);
 	}
 
-	public double getDistanceByLine() {
+	public double distanceByLine() {
 		double distance = 0;
 		for (int i = 0; i < placeList.size() - 1; i++) {
 			Place current = placeList.get(i);

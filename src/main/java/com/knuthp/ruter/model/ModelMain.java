@@ -26,8 +26,8 @@ public class ModelMain {
 	private static void showL14Distance(RuterGateway ruterGateway) {
 		Line line = new Line(ruterGateway, "9114");
 		LOG.info("id={}, name={}, start={}, end={}, distance={}", line.getId(),
-				line.getName(), line.getStart().getName(), line.getEnd()
-						.getName(), line.getDistanceByLine());
+				line.getName(), line.start().getName(), line.end()
+						.getName(), line.distanceByLine());
 	}
 
 	private static void listTrainLinesWithStartAndStop(RuterGateway ruterGateway) {
