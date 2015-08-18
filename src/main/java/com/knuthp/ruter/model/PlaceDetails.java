@@ -1,4 +1,4 @@
-package com.knuthp.vaadin.springboot.mvp.ruter;
+package com.knuthp.ruter.model;
 
 import java.util.Arrays;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package com.knuthp.vaadin.springboot.mvp.ruter;
+package com.knuthp.ruter.model;
 
 import static org.junit.Assert.fail;
 
@@ -8,6 +8,12 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import org.junit.Before;
 import org.junit.Test;
+
+import com.knuthp.ruter.model.LineLight;
+import com.knuthp.ruter.model.MonitoredStopVisitDetails;
+import com.knuthp.ruter.model.PlaceDetails;
+import com.knuthp.ruter.model.PlaceLight;
+import com.knuthp.ruter.model.RuterGateway;
 
 public class RuterGatewayIT {
 

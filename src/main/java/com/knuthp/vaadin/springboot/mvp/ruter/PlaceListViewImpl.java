@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.knuthp.ruter.model.PlaceLight;
 import com.knuthp.vaadin.springboot.mvp.Presenter;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.navigator.View;

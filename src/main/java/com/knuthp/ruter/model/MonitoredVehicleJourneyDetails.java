@@ -1,4 +1,4 @@
-package com.knuthp.vaadin.springboot.mvp.ruter;
+package com.knuthp.ruter.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 

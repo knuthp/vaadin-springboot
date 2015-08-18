@@ -1,5 +1,7 @@
 package com.knuthp.vaadin.springboot.mvp.ruter;
 
+import com.knuthp.ruter.model.PlaceDetails;
+
 public interface PlaceView {
 
 	void setPlace(PlaceDetails placeDetails);

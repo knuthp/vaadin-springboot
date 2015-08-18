@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.knuthp.ruter.model.LineLight;
+import com.knuthp.ruter.model.PlaceDetails;
 import com.knuthp.vaadin.springboot.mvp.Presenter;
 import com.vaadin.data.fieldgroup.FieldGroup;
 import com.vaadin.data.util.BeanContainer;

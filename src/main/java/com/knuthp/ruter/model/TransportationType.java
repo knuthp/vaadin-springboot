@@ -1,4 +1,4 @@
-package com.knuthp.vaadin.springboot.mvp.ruter;
+package com.knuthp.ruter.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

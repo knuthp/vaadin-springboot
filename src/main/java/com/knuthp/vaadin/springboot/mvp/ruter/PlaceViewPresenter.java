@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.knuthp.ruter.model.PlaceDetails;
+import com.knuthp.ruter.model.RuterGateway;
 import com.knuthp.vaadin.springboot.mvp.Presenter;
 import com.knuthp.vaadin.springboot.mvp.ruter.PlaceView.PlaceViewListener;
 import com.vaadin.spring.annotation.SpringComponent;
