@@ -26,6 +26,10 @@ public class Line {
 		return lineLight.getName();
 	}
 
+	public TransportationType getTransportation() {
+		return lineLight.getTransportation();
+	}
+
 	public List<Place> stops() {
 		if (placeList == null) {
 			List<PlaceLight> lineStops = ruterGateway.getLineStops(lineLight
