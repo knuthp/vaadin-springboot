@@ -1,8 +1,10 @@
 package com.knuthp.vaadin.springboot.mvp.ruter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,6 +18,9 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.ViewScope;
+import com.vaadin.ui.Button;
+import com.vaadin.ui.CheckBox;
+import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
@@ -28,9 +33,19 @@ public class LineListViewImpl extends VerticalLayout implements LineListView,
 	private final List<LineListViewListener> listeners = new ArrayList<LineListView.LineListViewListener>();
 	private final BeanContainer<String, Line> lineListBeans;
 	private final Table table;
+	private final Map<TransportationType, CheckBox> filterMap = new HashMap<TransportationType, CheckBox>();
 
 	@Autowired
 	public LineListViewImpl(Presenter<LineListView> presenter) {
+		HorizontalLayout filterButtons = new HorizontalLayout();
+		for(TransportationType t : TransportationType.values()) {
+			CheckBox checkBox = new CheckBox(t.toString());
+			checkBox.addValueChangeListener(listener -> filterChanged(t, (Boolean)listener.getProperty().getValue()));
+
+						filterButtons.addComponent(checkBox);
+			filterMap.put(t, checkBox);
+		}
+		addComponent(filterButtons);
 		lineListBeans = new BeanContainer<String, Line>(Line.class);
 		lineListBeans.setBeanIdProperty("id");
 		table = new Table("Lines", lineListBeans);
@@ -44,6 +59,11 @@ public class LineListViewImpl extends VerticalLayout implements LineListView,
 
 		presenter.setView(this);
 	}
+
+	private void filterChanged(TransportationType transportationType, boolean selected) {
+		listeners.forEach(l -> l.filterChanged(transportationType, selected));
+	}
+
 
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -68,9 +88,11 @@ public class LineListViewImpl extends VerticalLayout implements LineListView,
 	@Override
 	public void addListener(LineListViewListener listener) {
 		listeners.add(listener);
-		HashMap<TransportationType, Boolean> filter = new HashMap<TransportationType, Boolean>();
-		filter.put(TransportationType.TRAIN, true);
-		listener.filterTransportType(filter);
+	}
+
+	@Override
+	public void setDisplayList(List<TransportationType> displayList) {
+		displayList.forEach(b -> filterMap.get(b).setValue(true));
 	}
 
 }

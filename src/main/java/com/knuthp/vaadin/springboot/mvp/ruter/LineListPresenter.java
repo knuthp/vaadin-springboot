@@ -1,5 +1,6 @@
 package com.knuthp.vaadin.springboot.mvp.ruter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -16,26 +17,41 @@ import com.vaadin.spring.annotation.VaadinSessionScope;
 
 @SpringComponent
 @VaadinSessionScope
-public class LineListPresenter implements Presenter<LineListView>, LineListViewListener {
+public class LineListPresenter implements Presenter<LineListView>,
+		LineListViewListener {
 	private LineListView view;
 	private LineList lineList;
+	private List<TransportationType> displayList = new ArrayList<TransportationType>();
 
 	@Autowired
 	public LineListPresenter(LineList lineList) {
 		this.lineList = lineList;
+		displayList.add(TransportationType.TRAIN);
 	}
 
 	@Override
 	public void setView(LineListView view) {
 		this.view = view;
-		view.setLines(lineList.getAllLines());
+		view.setDisplayList(displayList);
 		view.addListener(this);
-		
-		}
+		setLines();
+	}
 
 	@Override
-	public void filterTransportType(Map<TransportationType, Boolean> filter) {
-		List<Line> filtered = lineList.getAllLines().stream().filter(e -> filter.get(e.getTransportation()) != null).collect(Collectors.toList());
+	public void filterChanged(TransportationType transportationType,
+			boolean selected) {
+		if (selected) {
+			displayList.add(transportationType);
+		} else {
+			displayList.remove(transportationType);
+		}
+		setLines();
+	}
+
+	private void setLines() {
+		List<Line> filtered = lineList.getAllLines().stream()
+				.filter(e -> displayList.contains(e.getTransportation()))
+				.collect(Collectors.toList());
 		view.setLines(filtered);
 	}
 

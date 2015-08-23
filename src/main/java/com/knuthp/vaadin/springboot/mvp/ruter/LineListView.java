@@ -8,12 +8,15 @@ import com.knuthp.ruter.model.TransportationType;
 
 public interface LineListView {
 
+	void setDisplayList(List<TransportationType> displayList);
 	void setLines(List<Line> allLines);
 	
 	interface LineListViewListener {
-		void filterTransportType(Map<TransportationType, Boolean> filter);
+		void filterChanged(TransportationType transportationType,
+				boolean selected);
 	}
 	
 	void addListener(LineListViewListener listener);
+
 
 }
