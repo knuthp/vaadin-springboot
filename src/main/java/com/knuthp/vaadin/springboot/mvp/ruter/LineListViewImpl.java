@@ -1,11 +1,12 @@
 package com.knuthp.vaadin.springboot.mvp.ruter;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.knuthp.ruter.model.Line;
@@ -16,12 +17,12 @@ import com.vaadin.data.Property;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
+import com.vaadin.server.ClassResource;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.spring.annotation.ViewScope;
-import com.vaadin.ui.Button;
 import com.vaadin.ui.CheckBox;
+import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 
@@ -29,6 +30,9 @@ import com.vaadin.ui.VerticalLayout;
 @SpringView(name = LineListViewImpl.VIEW_NAME)
 public class LineListViewImpl extends VerticalLayout implements LineListView,
 		View {
+	private static final long serialVersionUID = 1L;
+	private static final Logger LOG = LoggerFactory
+			.getLogger(LineListViewImpl.class);
 	public static final String VIEW_NAME = "LineList";
 	private final List<LineListViewListener> listeners = new ArrayList<LineListView.LineListViewListener>();
 	private final BeanContainer<String, Line> lineListBeans;
@@ -38,11 +42,12 @@ public class LineListViewImpl extends VerticalLayout implements LineListView,
 	@Autowired
 	public LineListViewImpl(Presenter<LineListView> presenter) {
 		HorizontalLayout filterButtons = new HorizontalLayout();
-		for(TransportationType t : TransportationType.values()) {
+		for (TransportationType t : TransportationType.values()) {
 			CheckBox checkBox = new CheckBox(t.toString());
-			checkBox.addValueChangeListener(listener -> filterChanged(t, (Boolean)listener.getProperty().getValue()));
+			checkBox.addValueChangeListener(listener -> filterChanged(t,
+					(Boolean) listener.getProperty().getValue()));
 
-						filterButtons.addComponent(checkBox);
+			filterButtons.addComponent(checkBox);
 			filterMap.put(t, checkBox);
 		}
 		addComponent(filterButtons);
@@ -60,10 +65,10 @@ public class LineListViewImpl extends VerticalLayout implements LineListView,
 		presenter.setView(this);
 	}
 
-	private void filterChanged(TransportationType transportationType, boolean selected) {
+	private void filterChanged(TransportationType transportationType,
+			boolean selected) {
 		listeners.forEach(l -> l.filterChanged(transportationType, selected));
 	}
-
 
 	@Override
 	public void enter(ViewChangeEvent event) {
@@ -77,12 +82,21 @@ public class LineListViewImpl extends VerticalLayout implements LineListView,
 		lineListBeans.addAll(allLines);
 	}
 
-	public Object generatePrettyNameCell(Table source, Object itemId, Object columnId) {
+	public Object generatePrettyNameCell(Table source, Object itemId,
+			Object columnId) {
 		Item item = source.getItem(itemId);
 		Property<String> name = item.getItemProperty("name");
-		Property<TransportationType> type = item.getItemProperty("transportation");
-		Label label = new Label(type.getValue() + name.getValue());
-		return label;
+		Property<TransportationType> type = item
+				.getItemProperty("transportation");
+		ClassResource resource = new ClassResource("icons/"
+				+ type.getValue().name().toLowerCase() + ".svg");
+
+		LOG.info(resource.getFilename() + resource.getMIMEType()
+				+ resource.getBufferSize());
+		Embedded image = new Embedded(type.getValue().toString(), resource);
+		image.setWidth(32, Unit.PIXELS);
+		image.setHeight(32, Unit.PIXELS);
+		return image;
 	}
 
 	@Override
