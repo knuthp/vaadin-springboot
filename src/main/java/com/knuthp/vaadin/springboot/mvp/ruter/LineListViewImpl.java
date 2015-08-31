@@ -56,9 +56,9 @@ public class LineListViewImpl extends VerticalLayout implements LineListView,
 		table = new Table("Lines", lineListBeans);
 		table.setColumnHeader("name", "Navn");
 		table.setColumnHeader("transportation", "Transport");
-		table.setVisibleColumns("name", "transportation");
+		table.addGeneratedColumn("Icon", this::generatePrettyNameCell);
+		table.setVisibleColumns("Icon", "name", "transportation");
 		table.setSelectable(true);
-		table.addGeneratedColumn("name2", this::generatePrettyNameCell);
 
 		addComponent(table);
 
