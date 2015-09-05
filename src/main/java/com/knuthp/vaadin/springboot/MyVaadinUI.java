@@ -1,19 +1,29 @@
 package com.knuthp.vaadin.springboot;
 
+import java.io.IOException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.knuthp.vaadin.springboot.login.SimpleLoginView;
 import com.knuthp.vaadin.springboot.mvp.calculator.MvpCalculatorViewImpl;
 import com.knuthp.vaadin.springboot.mvp.ruter.LineListViewImpl;
 import com.knuthp.vaadin.springboot.mvp.ruter.PlaceListViewImpl;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Title;
 import com.vaadin.navigator.Navigator;
+import com.vaadin.server.RequestHandler;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinResponse;
+import com.vaadin.server.VaadinSession;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.spring.navigator.SpringViewProvider;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.CssLayout;
+import com.vaadin.ui.Label;
 import com.vaadin.ui.Panel;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -24,9 +34,10 @@ import com.vaadin.ui.themes.ValoTheme;
 @SpringUI
 public class MyVaadinUI extends UI {
 	private static final long serialVersionUID = 1L;
-	// we can use either constructor autowiring or field autowiring
+	private static final Logger LOG = LoggerFactory.getLogger(MyVaadinUI.class);
 	@Autowired
 	private SpringViewProvider viewProvider;
+	private Label userName = new Label();
 
 	@Override
 	protected void init(VaadinRequest request) {
@@ -48,6 +59,8 @@ public class MyVaadinUI extends UI {
 				PlaceListViewImpl.VIEW_NAME));
 		navigationBar.addComponent(createNavigationButton("Line List",
 				LineListViewImpl.VIEW_NAME));
+		navigationBar.addComponent(createNavigationButton("Login",
+				SimpleLoginView.VIEW_NAME));
 		root.addComponent(navigationBar);
 
 		final Panel viewContainer = new Panel();
@@ -57,6 +70,20 @@ public class MyVaadinUI extends UI {
 
 		Navigator navigator = new Navigator(this, viewContainer);
 		navigator.addProvider(viewProvider);
+
+		VaadinSession.getCurrent().addRequestHandler(new RequestHandler() {
+
+			@Override
+			public boolean handleRequest(VaadinSession session,
+					VaadinRequest request, VaadinResponse response)
+					throws IOException {
+				String user = (String) session.getAttribute("user");
+				MDC.put("user", user);
+				userName.setValue("Welcome " + user);
+				return false;
+			}
+		});
+		root.addComponent(userName);
 	}
 
 	private Component createNavigationButton(String caption, String viewName) {
